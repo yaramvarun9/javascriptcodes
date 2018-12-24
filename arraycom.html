@@ -1,0 +1,35 @@
+<html>
+<head>
+</head>
+<body>
+<script>
+
+var a=["a","b","c","d"];
+var b=["a","b","a","c","c","d","b","a"];
+var c=[];
+var co,i,j;
+var al=a.length;
+var bl=b.length;
+
+for(i=0;i<al;i++)
+{
+co=0;
+
+for(j=0;j<bl;j++)
+{
+if(a[i]==b[j])
+{
+
+  co++
+}
+}
+c.push(co);
+
+}
+for(i=0;i<a.length;i++)
+{
+document.write(a[i]+" is repeated "+c[i]+" times "+"<br>");
+}
+</script>
+</body>
+</html>

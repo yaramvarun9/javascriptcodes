@@ -1,0 +1,116 @@
+<html>
+<body>
+  <script>
+
+
+
+ function usergeneration(n){
+    var arr = new Array(n);
+    var i=0;
+    while(i<n){
+      var flag = true;
+
+      var x = Math.floor((Math.random()*100)+1);
+      for(var j=0;j<n;j++){
+        if(arr[j]==x){
+        flag = false;
+        break;
+      }
+      }
+
+    if(flag==true){
+      arr[i] = x;
+      i++;
+    }
+
+    }
+    return arr;
+  }
+
+  function tumbolanumber(){
+   while(k<n){
+     var flag = true;
+
+    var y = Math.floor((Math.random()*100)+1);
+    for(var i=0;i<100;i++){
+      if(tumbola[i]==y)
+      {
+        flag = false;
+      break;
+      }
+    }
+    if(flag==true){
+    tumbola[k] = y;
+    k++;
+    return y;
+  }
+}
+}
+
+
+var no = 10;
+
+var varun = usergeneration(no);
+document.write("varun" + "  :   ");
+for(var t=0;t<no;t++){
+  document.write(varun[t]+", ");
+
+}
+document.write("<br>");
+var bunny = usergeneration(no);
+document.write("bunny" + "   :   ");
+for(var t=0;t<no;t++){
+  document.write(bunny[t] + ", ");
+
+}
+document.write("<br>");
+var n = 100;
+var tumbola = new Array(n);
+
+
+var countbunny = 10;
+var countvarun = 10;
+var count = 0;
+var k =0;
+document.write("picked numbers are :" + "<br>");
+while(count<n){
+  var pick = tumbolanumber();
+
+  document.write(pick + " ");
+  count++;
+for(var i=0;i<no;i++){
+  if(varun[i]==pick){
+    countvarun--;
+    break;
+  }
+}
+for(var j=0;j<no;j++){
+  if(bunny[j]==pick){
+    countbunny--;
+    break;
+  }
+}
+
+if(countbunny==0 && countvarun==0){
+  document.write("<br>");
+
+  document.write("Both varun and bunny has won the game");
+  break;
+}
+ if(countbunny==0){
+   document.write("<br>");
+
+  document.write("bunny has won the game");
+  break;
+}
+if(countvarun==0) {
+  document.write("<br>");
+
+  document.write("varun has won the game");
+break;
+}
+}
+
+</script>
+</body>
+</html>

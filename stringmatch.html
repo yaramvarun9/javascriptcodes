@@ -1,0 +1,34 @@
+<html>
+<head><title>string matching</title></head>
+
+<body>
+  <p id="a"><p>
+<script>
+
+var s1="varun";
+var s2="abcdvarunhdeivarunjhweifhvarun";
+
+var s1l=s1.length;
+var s2l=s2.length;
+var count=0;
+var j=0;
+for(i=0;i<s2l;i++)
+{
+if(s1.charAt(j)==s2.charAt(i))
+{
+if(s1l-1==j)
+{
+count++;
+j=0;
+}
+else {
+    j++;
+}
+}
+
+}
+document.getElementById("a").innerHTML="pattern is matched"+count+"times";
+
+</script>
+</body>
+</html>

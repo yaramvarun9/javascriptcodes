@@ -1,0 +1,55 @@
+<html>
+<head><title>string matching</title></head>
+
+<body>
+  <p id="a"><p>
+<script>
+function setCharAt(str,index,chr) {
+    if(index > str.length-1) return str;
+    return str.substr(0,index) + chr + str.substr(index+1);
+}
+
+var s1="varun";
+var s2="abcdvarunhdeivarunjhweifhvaru";
+var s3=" ";
+var s1l=s1.length;
+var s2l=s2.length;
+var count=0;
+var j=0;
+
+for(i=0;i<s2l;i++)
+{
+
+if(s1.charAt(j)==s2.charAt(i))
+{
+s3+=s1.charAt(j);
+if(s1l-1==j)
+{
+do{
+  document.write(s1.charAt(j));
+  j--;
+  s3="";
+}while(j>=0)
+j++;
+}
+else if(s1.charAt(j+1)!=s2.charAt(i+1)||s1.charAt(j+1)==null)
+{
+  document.write(s3);
+
+}
+else {
+  j++;
+}
+
+}
+
+else {
+    document.write(s2.charAt(i));
+}
+}
+
+document.getElementById("a").innerHTML=s2;
+
+</script>
+</body>
+</html>

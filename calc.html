@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> calc</title>
+<script>
+function myfun()
+{
+var x=document.getElementById("n1").value;
+var y=document.getElementById("n2").value;
+var r=document.getElementById("op").value;
+
+var x1=parseInt(x);
+var y1=parseInt(y);
+if(r=="add")
+{
+var c=x1+y1;
+}
+else if(r=="sub")
+{
+var c=x1-y1;
+}
+else if(r=="mul")
+{
+var c=x1*y1;
+}
+else
+{
+var c=x1/y1;
+}
+document.getElementById("result").innerHTML=c;
+console.log(c);
+
+}
+</script>
+</head>
+<body>
+<input type="text" name="var1" id="n1"><br>
+<input type="text" name="var2" id="n2"><br>
+
+<select name="operation" id="op">
+<option value="add">addition</option>
+<option value="sub">substraction</option>
+<option value="mul">multiplication</option>
+<option value="div">division</option>
+</select>
+<br>
+
+<input type="submit" value="submit" onclick="myfun()">
+
+<p id="result"> hello</p>
+
+</body>
+</html>
+ 
