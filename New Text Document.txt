@@ -1,0 +1,115 @@
+var AWS=require('aws-sdk');
+exports.handler = function(event,context,callback) {
+AWS.config.update({                    //setting the region
+  region: "us-west-1",
+});
+var docClient = new AWS.DynamoDB.DocumentClient();               //configuring dynamodb
+var params=
+{
+    TableName:"CompanyDetails",
+    FilterExpression:"#c=:ic",
+    ExpressionAttributeNames:{
+        "#c":"companyid"
+    },
+    ExpressionAttributeValues:{
+        ":ic":event.companyid
+    },
+    ProjectionExpression:"taxes"
+};
+docClient.scan(params, function(err, data) {                                                 // scanning the data
+ if (err) {
+     console.error("Unable to read item");
+     callback(null,err);
+ } else {
+ console.log("Items have been read successfully");
+        var arr=[];
+        var k=data.Items[0].taxes.earnings;
+        //    console.log(k);
+        var keys=Object.keys(k);
+        var l=keys.length;
+        var total=0;
+
+for(var m=0;m<l-1;m++){
+            var j=keys[m];
+            if(j=="conveyanceallowence"){
+             var y=event.salary*data.Items[0].taxes.earnings.conveyanceallowence/100;
+                arr.push("conveyanceallowence");
+                arr.push(y);
+                total+=y;
+            }
+            else if(j=="hra"){
+             var y=event.salary*data.Items[0].taxes.earnings.hra/100;
+                arr.push("hra");
+                arr.push(y);
+                total+=y;
+            }
+            else if(j=="empreferral"){
+             var y=event.salary*data.Items[0].taxes.earnings.empreferral/100;
+                arr.push("empreferral");
+                arr.push(y);
+                total+=y;
+            }
+            else if(j=="engagementbonus"){
+             var y=event.salary*data.Items[0].taxes.earnings.engagementbonus/100;
+                arr.push("engagementbonus");
+                arr.push(y);
+                total+=y;
+            }
+            else if(j=="incentive"){
+             var y=event.salary*data.Items[0].taxes.earnings.incentive/100;
+                arr.push("incentive");
+                arr.push(y);
+                total+=y;
+            }
+            else if(j=="wbp"){
+             var y=event.salary*data.Items[0].taxes.earnings.wbp/100;
+                arr.push("wbp");
+                arr.push(y);
+                total+=y;
+            }
+            else if(j=="medicalallowence"){
+             var y=event.salary*data.Items[0].taxes.earnings.medicalallowence/100;
+                arr.push("medicalallowence");
+                arr.push(y);
+                total+=y;
+            }
+            else if(j=="shiftbonus"){
+             var y=event.salary*data.Items[0].taxes.earnings.shiftbonus/100;
+                arr.push("shiftbonus");
+                arr.push(y);
+                total+=y;
+           }
+}
+var remaining=event.salary-total;
+ /*       var response={
+            "status":"200",
+            "message":"success",
+            "salary":event.salary,
+            "remain":arr,
+            "other":total,
+            "basic salary":remaining
+        };         */
+        var slip={
+            "companyid":event.companyid,
+            "salary":event.salary,
+            "remain":arr,
+            "other":total,
+            "basic salary":remaining
+        };
+
+var p={
+ TableName:"PaySlip",
+   Item:slip
+};
+docClient.put(p, function(err, res) {
+ if (err) {
+     console.error("Unable to read item");
+   // console.log(resp);
+ } 
+ else{
+     console.log("data successfully posted");
+ }
+});
+}
+});
+};
